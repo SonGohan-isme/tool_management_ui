@@ -23,6 +23,8 @@ import { Benifit } from 'src/app/model/Benifit';
 import { BenifitService } from 'src/app/services/benifit/benifit.service';
 import { ClaimReviewFormComponent } from '../../dialog/claim-review-form/claim-review-form.component';
 import { RequestAttachment } from 'src/app/model/RequestAttachment';
+import { MainBenefitScale } from 'src/app/model/MainBenefitScale';
+import { SubBenefitScale } from 'src/app/model/SubBenefitScale';
 
 @Component({
   selector: 'app-detail-claim',
@@ -30,8 +32,7 @@ import { RequestAttachment } from 'src/app/model/RequestAttachment';
   styleUrls: ['./detail-claim.component.css']
 })
 export class DetailClaimComponent implements OnInit {
-
-  listSubBenifit: Array<Benifit> = [];
+  listSubBenifit: Array<Benifit>;
   listDocument = new Array<CustomerAttachment>();
   listClaimDocument = new Array<RequestAttachment>();
   illustration: Illustration;
@@ -40,6 +41,10 @@ export class DetailClaimComponent implements OnInit {
   listSubRelatedPerSonBig: Array<any> = [];
   listSubRelatedPerSonSmall: IllustrationSubBenifit[] = [];
   listRelatedPerSonInfo: Array<RelatedPersonInfo> = [];
+  illustrationSubBenefit: IllustrationSubBenifit;
+  listSubBenefitScale: Array<SubBenefitScale> = [];
+  listMainBenefitScale: Array<MainBenefitScale> = [];
+  listSub: Array<IllustrationSubBenifit> = [];
 
   status: boolean = false;
   req: Request;
@@ -56,7 +61,6 @@ export class DetailClaimComponent implements OnInit {
     this.contractRequestService.getOneContractRequest(this.activateRoute.snapshot.params['id']).subscribe((data => {
       this.req = data;
       // đề phòng user nhập các id khác nhau trên đường dẫn
-      if (this.req.code_reciever != jwt_decode(this.common.getCookie('token_key'))['sub']) return;
       let data1 = this.req.id_contract;
       this.contractService.getDetailContractForCustomer(data1).subscribe((data1 => {
         this.contract = data1;
@@ -108,6 +112,21 @@ export class DetailClaimComponent implements OnInit {
             }
           }
 
+          // this.illustrationService.getAllSubBenefitById(this.contract.id_illustration).subscribe((data => {
+          //   this.listSub = data;
+          //   this.illustrationService.getAllSubBenefitScaleBySubBenefitId(this.listSub[0].id_sub_benifit).subscribe((data => {
+          //     this.listSubBenefitScale = data;
+          //   }))
+          // }))
+
+          // this.illustrationService.getAllMainBenefitScaleByMainBenefitId(this.contract.id_main_benifit).subscribe((data => {
+          //   this.listMainBenefitScale = data;
+          // }))
+
+          this.benifitSer.getAllSubBenifit().subscribe((data => {
+            this.listSubBenifit = data;
+          }))
+
           this.fileService.getFile(this.contract.id).subscribe((data => {
             this.listDocument = data;
             this.spinner.hide();
@@ -128,9 +147,10 @@ export class DetailClaimComponent implements OnInit {
           this.custInfo = data2;
         }))
       }))
+
     }))
 
-
+    this.spinner.hide();
 
   }
 

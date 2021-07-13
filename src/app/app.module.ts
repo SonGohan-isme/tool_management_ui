@@ -103,6 +103,13 @@ import { DetailEmployeeInfoComponent } from './view/detail-employee-info/detail-
 import { ClaimRequestManageComponent } from './view/claim-request-manage/claim-request-manage.component';
 import { DetailClaimComponent } from './view/claim-request-manage/detail-claim/detail-claim.component';
 import { ClaimReviewFormComponent } from './view/dialog/claim-review-form/claim-review-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerCareComponent } from './customerwebsite/customer-care/customer-care.component';
+import { CustomerHelpComponent } from './customerwebsite/customer-help/customer-help.component';
+import { GetContactInfoComponent } from './customerwebsite/get-contact-info/get-contact-info.component';
+import { ClaimGuideComponent } from './customerwebsite/claim-guide/claim-guide.component';
+import { ClaimSubmitFormComponent } from './customerwebsite/claim-submit-form/claim-submit-form.component';
+import { ListRequestCustomerComponent } from './customerwebsite/list-request-customer/list-request-customer.component';
 
 
 
@@ -186,6 +193,12 @@ import { ClaimReviewFormComponent } from './view/dialog/claim-review-form/claim-
     ClaimRequestManageComponent,
     DetailClaimComponent,
     ClaimReviewFormComponent,
+    CustomerCareComponent,
+    CustomerHelpComponent,
+    GetContactInfoComponent,
+    ClaimGuideComponent,
+    ClaimSubmitFormComponent,
+    ListRequestCustomerComponent,
   ],
   imports: [
     DataTablesModule,
@@ -212,7 +225,8 @@ import { ClaimReviewFormComponent } from './view/dialog/claim-review-form/claim-
     MatSnackBarModule,
     MatSelectModule,
     Ng2SearchPipeModule,
-    Ng2OrderModule
+    Ng2OrderModule,
+    NgbModule
   ],
   entryComponents: [AdminResetPasswordComponent,AppraiserReviewFormComponent,EmployeeEditInfoDialogComponent,ContractPauseDialogComponent,ContractChangeInfoDialogComponent,ReportCustomerDialogComponent,CustomerEditInfoComponent,AdminAddEmployeeInfoComponent,AdminAddAccountEmployeeComponent,AddCustomerIllustrationDialogComponent,CustomerAddInfoDialogComponent,ContractAddDialogComponent,NotificationConfirmDialogComponent,PauseCustomerDialogComponent],
   providers: [AdminDataServiceService],
